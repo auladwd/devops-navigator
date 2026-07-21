@@ -240,7 +240,7 @@ MIT License — see [LICENSE](LICENSE) file for details.
 
 ## 👨‍💻 Author
 
-**Abdullah**
+**Md. Aulad Hossen**
 - GitHub: [@your-username](https://github.com/your-username)
 
 ---
