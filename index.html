@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DevOps Navigator — আপনার DevOps Learning Dashboard</title>
+  <meta name="description" content="DevOps Navigator — একটি সম্পূর্ণ DevOps শেখার dashboard। Roadmap, Commands, CI/CD Pipeline, Quiz, Notes — সব এক জায়গায়।" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+</head>
+<body>
+
+<!-- ============================================
+     SIDEBAR
+     ============================================ -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-icon">🚀</div>
+    <div class="logo-text">
+      <h1>DevOps Navigator</h1>
+      <span>v1.0 · Learning Hub</span>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="nav-section-label">Main</div>
+
+    <a class="nav-item active" data-nav="dashboard" onclick="navigate('dashboard')" href="#">
+      <span class="nav-icon">📊</span>
+      <span>Dashboard</span>
+    </a>
+
+    <a class="nav-item" data-nav="roadmap" onclick="navigate('roadmap')" href="#">
+      <span class="nav-icon">🗺️</span>
+      <span>Learning Roadmap</span>
+    </a>
+
+    <div class="nav-section-label">Tools</div>
+
+    <a class="nav-item" data-nav="commands" onclick="navigate('commands')" href="#">
+      <span class="nav-icon">📋</span>
+      <span>Command Reference</span>
+    </a>
+
+    <a class="nav-item" data-nav="pipeline" onclick="navigate('pipeline')" href="#">
+      <span class="nav-icon">🔄</span>
+      <span>CI/CD Pipeline</span>
+    </a>
+
+    <a class="nav-item" data-nav="concepts" onclick="navigate('concepts')" href="#">
+      <span class="nav-icon">💡</span>
+      <span>Concepts Cards</span>
+    </a>
+
+    <div class="nav-section-label">Practice</div>
+
+    <a class="nav-item" data-nav="quiz" onclick="navigate('quiz')" href="#">
+      <span class="nav-icon">🧠</span>
+      <span>Quiz</span>
+      <span class="nav-badge">10Q</span>
+    </a>
+
+    <a class="nav-item" data-nav="notes" onclick="navigate('notes')" href="#">
+      <span class="nav-icon">📝</span>
+      <span>My Notes</span>
+    </a>
+  </nav>
+
+  <div class="sidebar-progress">
+    <div class="label">
+      <span>Overall Progress</span>
+      <span id="sidebar-progress-label">0%</span>
+    </div>
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill" id="sidebar-progress-bar" style="width:0%"></div>
+    </div>
+  </div>
+</aside>
+
+<!-- ============================================
+     MAIN
+     ============================================ -->
+<main class="main">
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-title">
+      <h2 id="header-h">📊 Dashboard</h2>
+      <p id="header-p">আপনার DevOps learning এর overview</p>
+    </div>
+    <div class="header-actions">
+      <div class="time-display" id="clock">00:00:00</div>
+    </div>
+  </header>
+
+  <!-- ==========================================
+       DASHBOARD SECTION
+       ========================================== -->
+  <section class="section active" id="sec-dashboard">
+
+    <!-- Stats Row -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon green">📈</div>
+        <div class="stat-info">
+          <div class="value green" id="stat-progress">0%</div>
+          <div class="label">সামগ্রিক অগ্রগতি</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon cyan">✅</div>
+        <div class="stat-info">
+          <div class="value cyan" id="stat-topics">0/40</div>
+          <div class="label">Completed Topics</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon blue">📋</div>
+        <div class="stat-info">
+          <div class="value blue">16</div>
+          <div class="label">Command References</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon purple">🧠</div>
+        <div class="stat-info">
+          <div class="value purple">10</div>
+          <div class="label">Quiz Questions</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dashboard Grid -->
+    <div class="dashboard-grid">
+
+      <!-- CI/CD Pipeline Mini -->
+      <div class="pipeline-mini">
+        <div class="section-heading">🔄 CI/CD Pipeline Flow</div>
+        <div class="pipeline-flow">
+          <div class="pipeline-step">
+            <div class="p-stage">
+              <div class="p-stage-icon green">💻</div>
+              <div class="p-stage-label">Code</div>
+            </div>
+          </div>
+          <div class="p-arrow">→</div>
+          <div class="pipeline-step">
+            <div class="p-stage">
+              <div class="p-stage-icon cyan">⚙️</div>
+              <div class="p-stage-label">Build</div>
+            </div>
+          </div>
+          <div class="p-arrow">→</div>
+          <div class="pipeline-step">
+            <div class="p-stage">
+              <div class="p-stage-icon blue">🧪</div>
+              <div class="p-stage-label">Test</div>
+            </div>
+          </div>
+          <div class="p-arrow">→</div>
+          <div class="pipeline-step">
+            <div class="p-stage">
+              <div class="p-stage-icon purple">📦</div>
+              <div class="p-stage-label">Package</div>
+            </div>
+          </div>
+          <div class="p-arrow">→</div>
+          <div class="pipeline-step">
+            <div class="p-stage">
+              <div class="p-stage-icon yellow">🚀</div>
+              <div class="p-stage-label">Deploy</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Terminal Widget -->
+        <div class="terminal-widget">
+          <div class="terminal-bar">
+            <div class="t-dot red"></div>
+            <div class="t-dot yellow"></div>
+            <div class="t-dot green"></div>
+            <span class="terminal-title">github-actions · pipeline running</span>
+          </div>
+          <div class="terminal-body">
+            <div class="t-line"><span class="t-prompt">$</span><span class="t-cmd"> git push origin main</span></div>
+            <div class="t-output">✓ Triggering CI/CD pipeline...</div>
+            <div class="t-line"><span class="t-prompt">$</span><span class="t-cmd"> docker build -t myapp:v1.2 .</span></div>
+            <div class="t-output">✓ Image built successfully</div>
+            <div class="t-line"><span class="t-prompt">$</span><span class="t-cmd"> kubectl apply -f deployment.yaml</span></div>
+            <div class="t-output" style="color:var(--accent-green);">✓ deployment "myapp" updated · 3 replicas running</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Commands -->
+      <div class="quick-commands">
+        <div class="section-heading">⚡ Quick Commands</div>
+        <div>
+          <div class="cmd-chip" onclick="navigate('commands')">
+            <span class="tag">Docker</span> docker ps -a
+          </div>
+          <div class="cmd-chip" onclick="navigate('commands')">
+            <span class="tag">K8s</span> kubectl get pods
+          </div>
+          <div class="cmd-chip" onclick="navigate('commands')">
+            <span class="tag">Git</span> git log --oneline
+          </div>
+          <div class="cmd-chip" onclick="navigate('commands')">
+            <span class="tag">Linux</span> ps aux | grep app
+          </div>
+          <div class="cmd-chip" onclick="navigate('commands')">
+            <span class="tag">Terraform</span> terraform plan
+          </div>
+          <div class="cmd-chip" onclick="navigate('commands')">
+            <span class="tag">Docker</span> docker compose up -d
+          </div>
+          <div class="cmd-chip" onclick="navigate('commands')">
+            <span class="tag">K8s</span> kubectl describe pod
+          </div>
+          <div class="cmd-chip" onclick="navigate('commands')">
+            <span class="tag">AWS</span> aws ec2 describe-instances
+          </div>
+          <div class="cmd-chip" onclick="navigate('commands')">
+            <span class="tag">Linux</span> systemctl status nginx
+          </div>
+          <div class="cmd-chip" onclick="navigate('commands')">
+            <span class="tag">Git</span> git rebase -i HEAD~3
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Daily Tip + Activity -->
+    <div class="dashboard-grid">
+      <div class="daily-tip" id="daily-tip" style="transition:opacity 0.3s ease;">
+        <div class="tip-icon">💡</div>
+        <div class="tip-content">
+          <h4>আজকের Tip</h4>
+          <p>Docker container বন্ধ হলেও data থাকে না — সবসময় Volume ব্যবহার করুন persistent data-র জন্য।</p>
+        </div>
+      </div>
+
+      <div class="activity-list">
+        <div class="section-heading">🕐 শেখার পথ</div>
+        <div class="activity-item">
+          <div class="activity-dot green"></div>
+          <div class="activity-text">
+            <div class="title">Linux & Networking</div>
+            <div class="subtitle">Foundation — Phase 1</div>
+          </div>
+          <div class="activity-time">শুরু করুন →</div>
+        </div>
+        <div class="activity-item">
+          <div class="activity-dot cyan"></div>
+          <div class="activity-text">
+            <div class="title">Git & Version Control</div>
+            <div class="subtitle">Phase 2</div>
+          </div>
+          <div class="activity-time">শুরু করুন →</div>
+        </div>
+        <div class="activity-item">
+          <div class="activity-dot blue"></div>
+          <div class="activity-text">
+            <div class="title">Docker Containerization</div>
+            <div class="subtitle">Phase 3</div>
+          </div>
+          <div class="activity-time">শুরু করুন →</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       ROADMAP SECTION
+       ========================================== -->
+  <section class="section" id="sec-roadmap">
+    <div class="page-title">
+      <div class="page-title-text">
+        <h2>🗺️ DevOps Learning Roadmap</h2>
+        <p>প্রতিটি topic শেষ করলে ✓ চেক করুন — progress track হবে</p>
+      </div>
+    </div>
+    <div class="roadmap-container" id="roadmap-container"></div>
+  </section>
+
+  <!-- ==========================================
+       COMMANDS SECTION
+       ========================================== -->
+  <section class="section" id="sec-commands">
+    <div class="page-title">
+      <div class="page-title-text">
+        <h2>📋 Command Reference</h2>
+        <p>Docker, Kubernetes, Git, Linux, CI/CD, AWS — সব commands এক জায়গায়</p>
+      </div>
+    </div>
+
+    <div class="commands-toolbar">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input
+          type="text"
+          id="cmd-search"
+          placeholder="Commands search করুন..."
+          autocomplete="off"
+        />
+      </div>
+      <div class="filter-tabs">
+        <button class="filter-tab active" data-cat="all" onclick="setCmdFilter('all')">সব</button>
+        <button class="filter-tab" data-cat="docker" onclick="setCmdFilter('docker')">🐳 Docker</button>
+        <button class="filter-tab" data-cat="k8s" onclick="setCmdFilter('k8s')">☸️ K8s</button>
+        <button class="filter-tab" data-cat="git" onclick="setCmdFilter('git')">🌿 Git</button>
+        <button class="filter-tab" data-cat="linux" onclick="setCmdFilter('linux')">🐧 Linux</button>
+        <button class="filter-tab" data-cat="cicd" onclick="setCmdFilter('cicd')">🔄 CI/CD</button>
+        <button class="filter-tab" data-cat="aws" onclick="setCmdFilter('aws')">☁️ AWS/IaC</button>
+      </div>
+    </div>
+
+    <div class="commands-grid" id="commands-grid"></div>
+  </section>
+
+  <!-- ==========================================
+       PIPELINE SECTION
+       ========================================== -->
+  <section class="section" id="sec-pipeline">
+    <div class="page-title">
+      <div class="page-title-text">
+        <h2>🔄 CI/CD Pipeline Visualizer</h2>
+        <p>Real-world CI/CD pipeline কীভাবে কাজ করে — visual overview</p>
+      </div>
+    </div>
+
+    <div class="pipeline-full">
+      <div class="section-heading">🚦 Pipeline Stages</div>
+      <p style="font-size:14px;color:var(--text-secondary);margin-bottom:24px;">
+        একটি code change production-এ যেতে এই ধাপগুলো পার করে। প্রতিটি stage-এ automatic checks থাকে।
+      </p>
+
+      <div class="pipeline-stages">
+        <div class="stage-block">
+          <div class="stage-card s1">
+            <div class="stage-emoji">💻</div>
+            <div class="stage-name">SOURCE</div>
+            <div class="stage-status status-pass">✓ DONE</div>
+          </div>
+          <div class="stage-arrow">→</div>
+        </div>
+        <div class="stage-block">
+          <div class="stage-card s2">
+            <div class="stage-emoji">⚙️</div>
+            <div class="stage-name">BUILD</div>
+            <div class="stage-status status-pass">✓ DONE</div>
+          </div>
+          <div class="stage-arrow">→</div>
+        </div>
+        <div class="stage-block">
+          <div class="stage-card s3">
+            <div class="stage-emoji">🧪</div>
+            <div class="stage-name">TEST</div>
+            <div class="stage-status status-run">⟳ RUNNING</div>
+          </div>
+          <div class="stage-arrow">→</div>
+        </div>
+        <div class="stage-block">
+          <div class="stage-card s4">
+            <div class="stage-emoji">🔐</div>
+            <div class="stage-name">SECURITY</div>
+            <div class="stage-status status-wait">⏳ WAITING</div>
+          </div>
+          <div class="stage-arrow">→</div>
+        </div>
+        <div class="stage-block">
+          <div class="stage-card s5">
+            <div class="stage-emoji">📦</div>
+            <div class="stage-name">PACKAGE</div>
+            <div class="stage-status status-wait">⏳ WAITING</div>
+          </div>
+          <div class="stage-arrow">→</div>
+        </div>
+        <div class="stage-block">
+          <div class="stage-card s6">
+            <div class="stage-emoji">🚀</div>
+            <div class="stage-name">DEPLOY</div>
+            <div class="stage-status status-wait">⏳ WAITING</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GitHub Actions Sample -->
+      <div class="section-heading" style="margin-top:32px;">📄 Sample GitHub Actions Workflow</div>
+      <div class="terminal-widget">
+        <div class="terminal-bar">
+          <div class="t-dot red"></div>
+          <div class="t-dot yellow"></div>
+          <div class="t-dot green"></div>
+          <span class="terminal-title">.github/workflows/ci-cd.yml</span>
+        </div>
+        <div class="terminal-body" style="color:var(--text-secondary);">
+          <div style="color:var(--accent-green);">name: CI/CD Pipeline</div>
+          <div style="color:var(--accent-cyan);">on:</div>
+          <div style="padding-left:16px;">push:</div>
+          <div style="padding-left:32px;color:var(--accent-yellow);">branches: [main]</div>
+          <br>
+          <div style="color:var(--accent-cyan);">jobs:</div>
+          <div style="padding-left:16px;color:var(--accent-green);">build-and-deploy:</div>
+          <div style="padding-left:32px;">runs-on: ubuntu-latest</div>
+          <div style="padding-left:32px;color:var(--accent-cyan);">steps:</div>
+          <div style="padding-left:48px;">- uses: actions/checkout@v3</div>
+          <div style="padding-left:48px;">- name: <span style="color:var(--accent-yellow);">Build Docker Image</span></div>
+          <div style="padding-left:64px;">run: docker build -t <span style="color:#ff9d67;">myapp:${{ github.sha }}</span> .</div>
+          <div style="padding-left:48px;">- name: <span style="color:var(--accent-yellow);">Run Tests</span></div>
+          <div style="padding-left:64px;">run: docker run myapp npm test</div>
+          <div style="padding-left:48px;">- name: <span style="color:var(--accent-yellow);">Push to Registry</span></div>
+          <div style="padding-left:64px;">run: docker push myapp:${{ github.sha }}</div>
+          <div style="padding-left:48px;">- name: <span style="color:var(--accent-yellow);">Deploy to K8s</span></div>
+          <div style="padding-left:64px;">run: kubectl set image deploy/myapp myapp=myapp:${{ github.sha }}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pipeline Detail Cards -->
+    <div class="pipeline-details-grid">
+      <div class="pipeline-detail-card">
+        <h4>💻 Source Stage</h4>
+        <ul>
+          <li>Developer কোড লিখে GitHub-এ push করে</li>
+          <li>Pull Request তৈরি হয়</li>
+          <li>Code Review হয়</li>
+          <li>Branch merge হলে pipeline trigger হয়</li>
+        </ul>
+      </div>
+      <div class="pipeline-detail-card">
+        <h4>⚙️ Build & Test Stage</h4>
+        <ul>
+          <li>Dependencies install হয়</li>
+          <li>Application compile/build হয়</li>
+          <li>Unit tests run হয়</li>
+          <li>Code coverage check হয়</li>
+          <li>Docker image build হয়</li>
+        </ul>
+      </div>
+      <div class="pipeline-detail-card">
+        <h4>🚀 Deploy Stage</h4>
+        <ul>
+          <li>Docker image registry-তে push হয়</li>
+          <li>Staging-এ deploy হয় (integration test)</li>
+          <li>Approval gate (manual/automatic)</li>
+          <li>Production-এ rolling update হয়</li>
+          <li>Health check verify হয়</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       CONCEPTS SECTION
+       ========================================== -->
+  <section class="section" id="sec-concepts">
+    <div class="page-title">
+      <div class="page-title-text">
+        <h2>💡 DevOps Concepts</h2>
+        <p>Card-এ hover করুন বা click করুন — ব্যাখ্যা দেখতে flip হবে!</p>
+      </div>
+    </div>
+    <div class="concepts-grid" id="concepts-grid"></div>
+  </section>
+
+  <!-- ==========================================
+       QUIZ SECTION
+       ========================================== -->
+  <section class="section" id="sec-quiz">
+    <div class="page-title">
+      <div class="page-title-text">
+        <h2>🧠 DevOps Quiz</h2>
+        <p>আপনার DevOps জ্ঞান পরীক্ষা করুন — বাংলায়!</p>
+      </div>
+    </div>
+
+    <div class="quiz-container">
+      <div class="quiz-header">
+        <div class="quiz-info">
+          <h3>DevOps Knowledge Test</h3>
+          <p>Docker, Kubernetes, CI/CD, Linux, Git — সব বিষয়ে প্রশ্ন</p>
+        </div>
+        <div class="quiz-score" id="quiz-score-display">0/10</div>
+      </div>
+
+      <div id="quiz-area">
+        <div class="question-card">
+          <div class="question-num" id="quiz-num"></div>
+          <div class="question-text" id="question-text"></div>
+          <div class="options-grid" id="options-grid"></div>
+          <div class="quiz-explanation" id="quiz-explanation"></div>
+        </div>
+        <div class="quiz-nav">
+          <button class="quiz-btn" onclick="nextQuestion()">পরের প্রশ্ন →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       NOTES SECTION
+       ========================================== -->
+  <section class="section" id="sec-notes">
+    <div class="page-title">
+      <div class="page-title-text">
+        <h2>📝 My Notes</h2>
+        <p>শেখার সময় যা গুরুত্বপূর্ণ মনে হয় লিখে রাখুন — automatically save হবে</p>
+      </div>
+    </div>
+
+    <div class="notes-layout">
+      <div class="notes-sidebar">
+        <h3>📁 Notes</h3>
+        <button class="new-note-btn" onclick="newNote()">➕ নতুন Note</button>
+        <div id="notes-list"></div>
+      </div>
+
+      <div class="notes-editor">
+        <input
+          type="text"
+          id="note-title"
+          class="note-title-input"
+          placeholder="Note-এর শিরোনাম লিখুন..."
+        />
+        <textarea
+          id="note-body"
+          class="note-body-input"
+          placeholder="এখানে আপনার notes লিখুন...
+
+উদাহরণ:
+- Docker volume mount করতে: docker run -v /host:/container myapp
+- K8s pod restart করতে: kubectl rollout restart deploy/myapp
+- GitHub Actions secret যোগ করতে: Settings > Secrets and Variables"
+        ></textarea>
+        <div class="note-toolbar">
+          <button class="note-tool-btn primary" onclick="saveNote()">💾 Save</button>
+          <button class="note-tool-btn" onclick="deleteNote()">🗑️ Delete</button>
+          <span style="margin-left:auto;font-size:12px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;">
+            LocalStorage-এ save হয়
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script src="js/app.js"></script>
+</body>
+</html>
